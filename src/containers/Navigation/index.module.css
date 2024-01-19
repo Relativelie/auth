@@ -1,0 +1,36 @@
+.header {
+  padding: 1.2rem;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 5rem;
+  border-bottom: 1px solid var(--color-gray-800);
+}
+
+.header nav {
+  width: 70rem;
+}
+
+.list {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+}
+
+.list a {
+  text-decoration: none;
+  color: var(--color-white);
+  font-size: var(--font-size-large);
+}
+
+.list li {
+  list-style-type: none;
+}
+
+.list li:last-child {
+  margin-left: auto;
+}
+
+.list a:hover,
+.list a.active {
+  color: var(--color-primary-800);
+}
