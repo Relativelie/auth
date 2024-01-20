@@ -3,6 +3,7 @@ import { FieldValues, useForm } from 'react-hook-form';
 import Actions from './Actions';
 import Credentials from './Credentials';
 import { AuthModeENUM } from './models';
+import { routes } from '../App/constants';
 
 import classes from './index.module.css';
 
@@ -19,7 +20,7 @@ const Auth = () => {
 
   const onSubmit = (data: FieldValues) => {
     const credentials = JSON.stringify(data);
-    const actionPath = isLogin ? '/auth/login' : '/auth/register';
+    const actionPath = isLogin ? routes.auth.login : routes.auth.register;
     const options: SubmitOptions = { method: 'post', action: actionPath };
     submit({ credentials }, options);
   };

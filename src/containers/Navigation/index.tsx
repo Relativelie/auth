@@ -1,6 +1,8 @@
 import { Form, NavLink, useLoaderData } from 'react-router-dom';
-import classes from './index.module.css';
 import { AppOutlinedButton } from '../../components';
+import { routes } from '../App/constants';
+
+import classes from './index.module.css';
 
 export const MainNavigation = () => {
   const isAuth = useLoaderData() as boolean;
@@ -21,13 +23,13 @@ export const MainNavigation = () => {
                 </NavLink>
               </li>
               <li>
-                <NavLink to='/profile' className={({ isActive }) => getClassName(isActive)}>
+                <NavLink to={routes.profile} className={({ isActive }) => getClassName(isActive)}>
                   Profile
                 </NavLink>
               </li>
 
               <li>
-                <Form action='/auth/logout' method='post'>
+                <Form action={routes.auth.logout} method='post'>
                   <AppOutlinedButton title='Logout' />
                 </Form>
               </li>
@@ -35,7 +37,7 @@ export const MainNavigation = () => {
           )}
           {!isAuth && (
             <li>
-              <NavLink to='/auth' className={({ isActive }) => getClassName(isActive)}>
+              <NavLink to={routes.auth.auth} className={({ isActive }) => getClassName(isActive)}>
                 Authorization
               </NavLink>
             </li>

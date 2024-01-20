@@ -1,22 +1,9 @@
 import axios from 'axios';
-import TokenManager from '../utils/tokenManager';
 import { redirect } from 'react-router-dom';
+import TokenManager from '../utils/tokenManager';
 import { showError } from '../utils/showError';
-
-export type TokenResponse = {
-  access_token: string;
-  expires_in: number;
-  refresh_expires_in: number;
-  refresh_token: string;
-  token_type: string;
-  session_state: string;
-  scope: string;
-};
-
-export interface Credentials {
-  email: string;
-  password: string;
-}
+import { routes } from '../containers/App/constants';
+import { Credentials, TokenResponse } from '../containers/Auth/models';
 
 interface IAuthService {
   login(credentials: Credentials): Promise<void>;
@@ -58,7 +45,7 @@ class AuthService implements IAuthService {
 
   logout = () => {
     TokenManager.removeTokens();
-    return redirect('/auth');
+    return redirect(routes.auth.auth);
   };
 
   isAuthenticated = () => {

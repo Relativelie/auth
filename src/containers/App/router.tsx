@@ -8,13 +8,14 @@ import AuthService from '../../services/auth';
 import ProfileService from '../../services/profile';
 import { AppErrorComponent } from '../../components';
 import getCredentials from '../../utils/getCredentials';
+import { paths, routes } from './constants';
 
 const authService = new AuthService();
 const profileService = new ProfileService();
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: paths.home,
     element: <RootLayout />,
     errorElement: <AppErrorComponent />,
     id: 'root',
@@ -26,7 +27,7 @@ const router = createBrowserRouter([
         children: [
           { index: true, element: <Home /> },
           {
-            path: 'profile',
+            path: paths.profile,
             element: <Profile />,
             loader: async () => {
               return await profileService.getProfile();
@@ -36,35 +37,35 @@ const router = createBrowserRouter([
       },
 
       {
-        path: 'auth',
+        path: paths.auth.auth,
         element: <Auth />,
         loader: () => {
           if (authService.isAuthenticated()) {
-            return redirect('/');
+            return redirect(paths.home);
           }
           return null;
         },
         children: [
           {
-            path: 'login',
+            path: paths.auth.login,
             action: async ({ request }) => {
               const credentials = await getCredentials(request);
 
               await authService.login(credentials);
-              return redirect('/');
+              return redirect(routes.home);
             },
           },
           {
-            path: 'register',
+            path: paths.auth.register,
             action: async ({ request }) => {
               const credentials = await getCredentials(request);
 
               await authService.register(credentials);
-              return redirect('/');
+              return redirect(routes.home);
             },
           },
           {
-            path: 'logout',
+            path: paths.auth.logout,
             action: () => {
               return authService.logout();
             },

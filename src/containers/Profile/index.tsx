@@ -1,8 +1,9 @@
 import { useLoaderData } from 'react-router-dom';
-import classes from './index.module.css';
-import { IProfile } from '../../services/profile';
 import Avatar from './avatar/Avatar';
 import Info from './info/Info';
+import { IProfile } from './models';
+
+import classes from './index.module.css';
 
 const Profile = () => {
   const { name, job, email, location, interests, bio, avatar } = useLoaderData() as IProfile;

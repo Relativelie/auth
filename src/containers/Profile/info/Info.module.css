@@ -1,9 +1,9 @@
 .info {
-    display: grid;
-    grid-template-columns: 3rem 1fr;
-    gap: 2rem;
+  display: grid;
+  grid-template-columns: 3rem 1fr;
+  gap: 2rem;
 }
 
 .title {
-    color: var(--color-gray-500)
+  color: var(--color-gray-500);
 }

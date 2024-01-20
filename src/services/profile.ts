@@ -1,16 +1,11 @@
+import { IProfile } from '../containers/Profile/models';
 import { getRequest } from './methods';
 
-export interface IProfile {
-  name: string;
-  job: string;
-  email: string;
-  location: string;
-  interests: string[];
-  bio: string;
-  avatar: string;
+interface IProfileService {
+  getProfile: () => Promise<IProfile>;
 }
 
-class ProfileService {
+class ProfileService implements IProfileService {
   private baseURL = process.env.REACT_APP_BASE_URL;
   _profileUrl = `${this.baseURL}/api/profile`;
 
