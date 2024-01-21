@@ -5,9 +5,9 @@ import RootLayout from '../RootLayout';
 import AuthService from '../../services/auth';
 import ProfileService from '../../services/profile';
 import { AppErrorComponent } from '../../components';
-import getCredentials from '../../utils/getCredentials';
 import { paths, routes } from './constants';
 import ProtectedRoute from '../ProtectedRoute';
+import { isAuthenticated } from 'utils/isAuthenticated';
 
 const authService = new AuthService();
 const profileService = new ProfileService();
@@ -36,13 +36,13 @@ const router = createBrowserRouter([
           return profileService.getProfile();
         },
       },
-      
+
       // Public routes
       {
         path: paths.auth.auth,
         element: <Auth />,
         loader: () => {
-          if (authService.isAuthenticated()) {
+          if (isAuthenticated()) {
             return redirect(paths.home);
           }
           return null;
@@ -83,5 +83,10 @@ const router = createBrowserRouter([
     ],
   },
 ]);
+
+async function getCredentials(request: Request) {
+  const formData = await request.formData();
+  return JSON.parse(formData.get('credentials')?.toString() || '');
+}
 
 export default router;

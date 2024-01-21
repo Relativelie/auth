@@ -2,7 +2,7 @@ import { IProfile } from '../containers/Profile/models';
 import { getRequest } from './methods';
 
 interface IProfileService {
-  getProfile: () => Promise<IProfile>;
+  getProfile: () => Promise<IProfile | boolean>;
 }
 
 class ProfileService implements IProfileService {

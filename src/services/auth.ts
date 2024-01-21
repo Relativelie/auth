@@ -10,7 +10,6 @@ interface IAuthService {
   register(credentials: Credentials): Promise<void>;
   logout(): Response;
   refreshToken(refreshToken: string): Promise<void>;
-  isAuthenticated(): boolean;
 }
 
 class AuthService implements IAuthService {
@@ -33,7 +32,6 @@ class AuthService implements IAuthService {
       const response = await axios.post(this._refreshUrl, {
         refreshToken,
       });
-
       const tokenData: TokenResponse = response.data;
 
       AuthService._resetAccessToken(tokenData);
@@ -45,25 +43,24 @@ class AuthService implements IAuthService {
 
   logout = () => {
     TokenManager.removeTokens();
-    // window.location.reload();
     return redirect(routes.auth.auth);
   };
 
-  isAuthenticated = () => {
-    const accessToken = TokenManager.getAccessToken();
-    const expireDate = TokenManager.getExpireDate();
-    const refreshExpireDate = TokenManager.getRefreshExpireDate();
-    const refreshToken = TokenManager.getRefreshToken();
+  // isAuthenticated = () => {
+  //   const accessToken = TokenManager.getAccessToken();
+  //   const expireDate = TokenManager.getExpireDate();
+  //   const refreshExpireDate = TokenManager.getRefreshExpireDate();
+  //   const refreshToken = TokenManager.getRefreshToken();
 
-    if (!accessToken || !expireDate || !refreshExpireDate || !refreshToken) {
-      return false;
-    }
+  //   if (!accessToken || !expireDate || !refreshExpireDate || !refreshToken) {
+  //     return false;
+  //   }
 
-    const now = new Date();
-    const refreshExpire = new Date(refreshExpireDate);
+  //   const now = new Date();
+  //   const refreshExpire = new Date(refreshExpireDate);
 
-    return now < refreshExpire;
-  };
+  //   return now < refreshExpire;
+  // };
 
   register = async (credentials: Credentials) => {
     try {

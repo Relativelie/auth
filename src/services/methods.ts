@@ -3,6 +3,7 @@ import config from '../config';
 import TokenManager from '../utils/tokenManager';
 import AuthService from './auth';
 import { showError } from '../utils/showError';
+import { isAuthenticated } from 'utils/isAuthenticated';
 
 const authService = new AuthService();
 const baseURL = config.BASE_URL;
@@ -56,7 +57,7 @@ const handleError = async (error: unknown) => {
 axiosRequests.interceptors.response.use(handleResponse, handleError);
 
 const getRequest = async (url: string, requiresAuth = true): Promise<any> => {
-  if (requiresAuth && !authService.isAuthenticated()) {
+  if (requiresAuth && !isAuthenticated()) {
     return authService.logout();
   }
   return await axiosRequests.get(url);
