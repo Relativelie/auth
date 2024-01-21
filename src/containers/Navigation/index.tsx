@@ -19,7 +19,7 @@ export const MainNavigation = () => {
           {isAuth && (
             <>
               <li>
-                <NavLink to='/' className={({ isActive }) => getClassName(isActive)} end>
+                <NavLink to={routes.home} className={({ isActive }) => getClassName(isActive)} end>
                   Home
                 </NavLink>
               </li>
