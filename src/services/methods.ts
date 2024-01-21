@@ -4,6 +4,7 @@ import TokenManager from '../utils/tokenManager';
 import AuthService from './auth';
 import { showError } from '../utils/showError';
 import { isAuthenticated } from 'utils/isAuthenticated';
+import { redirect } from 'react-router-dom';
 
 const authService = new AuthService();
 const baseURL = config.BASE_URL;
@@ -50,7 +51,6 @@ const handleError = async (error: unknown) => {
     }
   } else {
     showError(error);
-    return authService.logout();
   }
 };
 
