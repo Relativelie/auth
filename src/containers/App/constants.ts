@@ -18,4 +18,5 @@ export const routes = {
     logout: '/auth/logout',
   },
   profile: '/profile',
+  notFound: '*',
 };

@@ -1,11 +1,14 @@
-import { Form, NavLink, useLoaderData } from 'react-router-dom';
+import { Form, NavLink } from 'react-router-dom';
 import { AppOutlinedButton } from '../../components';
 import { routes } from '../App/constants';
 
 import classes from './index.module.css';
+import AuthService from 'services/auth';
 
 export const MainNavigation = () => {
-  const isAuth = useLoaderData() as boolean;
+  const authService = new AuthService();
+  const isAuth = authService.isAuthenticated();
+
 
   const getClassName = (isActive: boolean) => {
     return isActive ? classes.active : undefined;

@@ -45,6 +45,7 @@ class AuthService implements IAuthService {
 
   logout = () => {
     TokenManager.removeTokens();
+    // window.location.reload();
     return redirect(routes.auth.auth);
   };
 
@@ -59,10 +60,9 @@ class AuthService implements IAuthService {
     }
 
     const now = new Date();
-    const expire = new Date(expireDate);
     const refreshExpire = new Date(refreshExpireDate);
 
-    return now < expire && now < refreshExpire;
+    return now < refreshExpire;
   };
 
   register = async (credentials: Credentials) => {

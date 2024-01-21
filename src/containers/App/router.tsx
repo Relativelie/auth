@@ -1,14 +1,13 @@
 import { createBrowserRouter, redirect } from 'react-router-dom';
 import Auth from '../Auth';
 import Home from '../Home';
-import Profile from '../Profile';
 import RootLayout from '../RootLayout';
-import ProtectedRoutes from './ProtectedRoutes';
 import AuthService from '../../services/auth';
 import ProfileService from '../../services/profile';
 import { AppErrorComponent } from '../../components';
 import getCredentials from '../../utils/getCredentials';
 import { paths, routes } from './constants';
+import ProtectedRoute from '../ProtectedRoute';
 
 const authService = new AuthService();
 const profileService = new ProfileService();
@@ -19,23 +18,26 @@ const router = createBrowserRouter([
     element: <RootLayout />,
     errorElement: <AppErrorComponent />,
     id: 'root',
-    loader: () => authService.isAuthenticated(),
     children: [
+      // Protected routes
       {
-        element: <ProtectedRoutes />,
-        loader: () => authService.isAuthenticated(),
-        children: [
-          { index: true, element: <Home /> },
-          {
-            path: paths.profile,
-            element: <Profile />,
-            loader: async () => {
-              return await profileService.getProfile();
-            },
-          },
-        ],
+        index: true,
+        element: <ProtectedRoute component={<Home />} />,
       },
-
+      {
+        path: paths.profile,
+        lazy: async () => {
+          const Page = (await import('../Profile')).default;
+          return {
+            element: <ProtectedRoute component={<Page />} />,
+          };
+        },
+        loader: () => {
+          return profileService.getProfile();
+        },
+      },
+      
+      // Public routes
       {
         path: paths.auth.auth,
         element: <Auth />,
@@ -71,6 +73,12 @@ const router = createBrowserRouter([
             },
           },
         ],
+      },
+      {
+        path: routes.notFound,
+        loader: () => {
+          return redirect(paths.home);
+        },
       },
     ],
   },

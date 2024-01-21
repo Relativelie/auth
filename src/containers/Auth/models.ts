@@ -1,6 +1,6 @@
 export enum AuthModeENUM {
-  login = 'login',
-  register = 'register',
+  login = 'Login',
+  register = 'Register',
 }
 
 export type TokenResponse = {

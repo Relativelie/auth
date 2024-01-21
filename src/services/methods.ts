@@ -55,7 +55,10 @@ const handleError = async (error: unknown) => {
 
 axiosRequests.interceptors.response.use(handleResponse, handleError);
 
-const getRequest = async (url: string): Promise<any> => {
+const getRequest = async (url: string, requiresAuth = true): Promise<any> => {
+  if (requiresAuth && !authService.isAuthenticated()) {
+    return authService.logout();
+  }
   return await axiosRequests.get(url);
 };
 
