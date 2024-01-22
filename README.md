@@ -13,7 +13,7 @@ react - refresh/access tokens - Router Dom v6 - react-hook-form - react-toastify
 
 * Authorization and registration
 * Sending requests with an access token
-* Refreshing token if access token is not valid
+* Refreshing token if an access token is not valid
 * Email and pass validation
 
 ## Backend mocks
