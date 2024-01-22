@@ -27,7 +27,7 @@ Backend mocks are located [here](https://github.com/Relativelie/auth_back). Thes
 https://github.com/Relativelie/auth/assets/59819426/1c7b29cb-fd69-4cf9-938d-3fd84b3cdbf0
 
 
-* Refreshing access token if it has response with 401 code
+* Refreshing access token if it has responded with 401 code
 
 https://github.com/Relativelie/auth/assets/59819426/17244c0b-25c5-42fb-b43c-6f5abce780fc
 
