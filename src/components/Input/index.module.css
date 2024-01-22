@@ -8,3 +8,7 @@
   font: inherit;
   padding: 0.25rem;
 }
+
+.span {
+  color: var(--color-primary-900);
+}

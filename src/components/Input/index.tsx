@@ -32,9 +32,11 @@ const AppInput: React.FC<AppInputProps> = ({
         id={id}
         type={type}
         placeholder={placeholder}
+        autoCorrect='off'
+        autoComplete='off'
         {...(register ? { ...register(name, validationSchema) } : null)}
       />
-      {errors[name] && <span>{errors[name]?.message?.toString()}</span>}
+      {errors[name] && <span className={classes.span}>{errors[name]?.message?.toString()}</span>}
     </div>
   );
 };
